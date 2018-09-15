@@ -9,5 +9,25 @@ export default [
         <p>Dolor sit amet</p>
       </React.Fragment>
     )
+  },
+  {
+    name: "Mixing",
+    description: (
+      <React.Fragment>
+        <p>Lorem ipsum</p>
+        <p>Dolor sit amet</p>
+        <p>Dolor sit amet</p>
+        <p>Dolor sit amet</p>
+      </React.Fragment>
+    )
+  },
+  {
+    name: "Mixing",
+    description: (
+      <React.Fragment>
+        <p>Lorem ipsum</p>
+        <p>Dolor sit amet</p>
+      </React.Fragment>
+    )
   }
 ];
