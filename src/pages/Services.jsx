@@ -14,8 +14,15 @@ class Entry extends Component {
   };
 
   componentDidMount() {
-    setTimeout(() => this.determineMaxHeight(), 2000);
+    this.timerHandle = setTimeout(() => this.determineMaxHeight(), 1000);
   }
+
+  componentWillUnmount = () => {
+   if (this.timerHandle) {
+       clearTimeout(this.timerHandle);
+       this.timerHandle = 0;               
+   }
+ };
 
   render() {
     return (
@@ -82,13 +89,17 @@ const styles = {
     textTransform: 'uppercase'
   },
   serviceLink: {...css.link, ...{
-    maxWidth: '600px',
+    maxWidth: css._contentWidth,
     display: 'block',
-    margin: '0 auto'
+    margin: '0 auto',
+    ':hover': {
+      cursor: 'pointer',
+      color: 'red'
+    }
   }},
   servicePrompt: {
     textTransform: 'uppercase',
-    coration: 'underline'
+    textDecoration: 'underline'
   },
   serviceDescHidden: {
     overflow: 'hidden',

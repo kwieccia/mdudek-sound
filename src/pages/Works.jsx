@@ -31,7 +31,7 @@ export default class Works extends Component {
 const styles = {
   workLink: {...css.link, ...{
     textTransform: 'uppercase',
-    maxWidth: '600px',
+    maxWidth: css._contentWidth,
     display: 'block',
     margin: '0 auto'
   }},

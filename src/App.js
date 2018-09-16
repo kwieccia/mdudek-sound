@@ -11,12 +11,13 @@ import Gear from './pages/Gear';
 import Services from './pages/Services';
 import Works from './pages/Works';
 import Work from './pages/Work';
+import Error404 from './pages/Error404';
 
 class AppContent extends Component {
   render() {
-    console.warn(this.props.location.key)
+    console.warn(this.props)
     return (
-      <div style={styles.pageWrapper}>
+      <div style={styles.pageWrapper(this.props.location.pathname)}>
         <header style={styles.pageHeader}>
           <span style={styles.pageTitle}>Michael Dudek</span>
           <span style={styles.pageCaption}>sound portfolio</span>
@@ -33,6 +34,7 @@ class AppContent extends Component {
               key={this.props.location.key}
               timeout={{ enter: 1000, exit: 0 }}
               classNames={'fade'}
+              exit={false}
             >
               <Switch>
                 <Route exact path="/" component={Homepage}/>
@@ -41,6 +43,7 @@ class AppContent extends Component {
                 <Route path="/services" component={Services} />
                 <Route exact path="/works" component={Works} />
                 <Route path="/works/:id" component={Work} />
+                <Route component={Error404} />
               </Switch>
             </CSSTransition>
           </TransitionGroup>
@@ -60,25 +63,36 @@ export default class WrappedApp extends Component {
   )
 }
 
+const switchBackground = (page) => {
+  console.warn(page)
+  switch (page) {
+    case '/works':
+      return 'navy';
+    default:
+      return '#222';
+  }
+}
+
 const styles = {
-  pageWrapper: {
-    background: '#222',
+  pageWrapper: (page) => ({
+    background: switchBackground(page),
     minHeight: '100vh',
     color: 'white',
     display: 'flex',
     alignItems: 'center',
     flexDirection: 'column',
-    padding: '0 30px'
-  },
+    padding: '0 30px',
+    transition: 'all 1s ease-in-out'
+  }),
   pageContent: {
     maxWidth: '100%',
-    width: 960,
+    width: css._wrapperWidth,
     textAlign: 'left'
   },
   pageHeader: {
     textTransform: 'uppercase',
     maxWidth: '100%',
-    width: 960,
+    width: css._wrapperWidth,
     padding: '50px 0',
     display: 'flex'
   },

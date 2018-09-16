@@ -1,17 +1,12 @@
 .fade-enter {
-    opacity: 0.01;
-    transition: all 1000ms ease-in-out;
-    transform: translateY(-20px);
+    animation: showPageOnLoad 1s ease-in-out 0s alternate;
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
 }
 
-.fade-enter.fade-enter-active {
-    transform: translateY(0);
-    opacity: 1;
-}
+.fade-enter.fade-enter-active {}
 
 .fade-exit {
     opacity: 0;
