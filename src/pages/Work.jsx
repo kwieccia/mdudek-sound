@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Error404 from './Error404';
 import { Link } from 'react-router-dom';
 import css from '../styles/styles';
+import SoundPlayer from '../components/SoundPlayer';
 
 import survivalGame from '../content/works/survivalGame';
 
@@ -12,18 +13,25 @@ const returnContentByUrl = (id) => {
   return works[id];
 };
 
-const Sound = (props) => (
-  <div>{props.content.name} {props.content.url}</div>
-);
-
 const Video = (props) => (
   <div>
-    <h3 style={styles.h3}>{props.content.name}</h3>
-    {props.content.url}
+    <h3 style={styles.h3}>{props.content.name}:</h3> 
+    <iframe width="100%" height={0.5625 * 600}
+      src={"https://www.youtube.com/embed/" + props.content.url + "?rel=0"}
+      frameborder="0" allow="autoplay; encrypted-media" allowfullscreen
+    />
   </div>
 );
 
 export default class Work extends Component {
+  state = {
+    playing: null
+  };
+
+  pauseOtherPlayers = (i) => {
+    this.setState({ playing: i });
+  };
+
   render() {
     const content = returnContentByUrl(this.props.match.params.id);
     if (content) {
@@ -41,7 +49,12 @@ export default class Work extends Component {
               ? (
                 <div>
                   <h3 style={styles.h3}>Listen music:</h3>
-                  {content.music.map((sound, i) => <Sound content={sound} key={i} />)}
+                  {content.music.map((sound, i) => (
+                    <SoundPlayer content={sound} counter={i} key={i}
+                      onStart={this.pauseOtherPlayers}
+                      current={this.state.playing}
+                    />
+                  ))}
                 </div>
               )
               : null

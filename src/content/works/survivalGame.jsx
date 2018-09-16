@@ -12,13 +12,17 @@ export default {
   music: [
     {
       name: "pre-alpha teaser",
-      url: "mp3.mp3"
-    }
+      url: "soulpete.mp3"
+    },
+      {
+        name: "pre-alpha teaser",
+        url: "soulpete.mp3"
+      }
   ],
   video: [
     {
       name: "sound design samples",
-      url: "youtube.com/87gvtufrt"
+      url: "XExGEgiCVus"
     }
   ]
 };
