@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import './styles/animations.css';
 import css from './styles/styles';
-import Radium from 'radium';
+import Radium, {StyleRoot} from 'radium';
 import { BrowserRouter, Route, Switch, Link, withRouter } from 'react-router-dom';
 import { TransitionGroup, CSSTransition } from "react-transition-group";
 
@@ -15,7 +15,6 @@ import Error404 from './pages/Error404';
 
 class AppContent extends Component {
   render() {
-    console.warn(this.props)
     return (
       <div style={styles.pageWrapper(this.props.location.pathname)}>
         <header style={styles.pageHeader}>
@@ -57,9 +56,11 @@ const App = withRouter(Radium(AppContent));
 
 export default class WrappedApp extends Component {
   render = () => (
-    <BrowserRouter>
-      <App />
-    </BrowserRouter>
+    <StyleRoot>
+      <BrowserRouter>
+        <App />
+      </BrowserRouter>
+    </StyleRoot>
   )
 }
 
@@ -69,7 +70,7 @@ const switchBackground = (page) => {
     case '/works':
       return 'navy';
     default:
-      return '#222';
+      return '#111';
   }
 }
 
@@ -87,23 +88,29 @@ const styles = {
   pageContent: {
     maxWidth: '100%',
     width: css._wrapperWidth,
-    textAlign: 'left'
+    textAlign: 'left',
+    paddingBottom: 80
   },
   pageHeader: {
     textTransform: 'uppercase',
     maxWidth: '100%',
     width: css._wrapperWidth,
-    padding: '50px 0',
-    display: 'flex'
+    padding: '50px 0 40px',
+    display: 'flex',
+    fontSize: '0.85em',
+    '@media screen and (max-width: 640px)': {
+      padding: '25px 0'
+    }
   },
   pageMenu: {
-    marginLeft: 'auto'
+    marginLeft: 'auto',
+    fontWeight: 600
   },
   pageMenuLink: {...css.link, ...{
     marginLeft: 50
   }},
   pageTitle: {
-
+    fontWeight: 600
   },
   pageCaption: {
     borderLeft: '1px solid white',

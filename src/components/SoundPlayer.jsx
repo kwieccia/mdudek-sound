@@ -1,7 +1,8 @@
 import Player from 'react-sound';
 import React, { Component } from 'react';
+import Radium from 'radium';
 
-export default class Sound extends Component {
+class SoundPlayer extends Component {
   state = {
     status: Player.status.STOPPED,
     position: 0,
@@ -71,20 +72,33 @@ export default class Sound extends Component {
   }
 }
 
+export default Radium(SoundPlayer);
+
 const styles = {
   player: {
-    border: '1px solid white'
+    border: '1px solid white',
+    marginBottom: 15,
+    textAlign: 'center',
+    padding: 15,
+    fontSize: '0.85em',
+    fontWeight: 600,
+    textTransform: 'uppercase',
+    transition: 'all 0.5s ease-in-out',
+    ':hover': {
+      cursor: 'pointer'
+    }
   },
   playing: {
-    background: 'yellow'
+    background: 'navy'
   },
   soundTotal: {
-    background: 'blue',
-    height: 20
+    background: 'rgba(255, 255, 255, 0.5)',
+    height: 7,
+    marginTop: 10
   },
   soundPlayed: {
-    background: 'red',
-    height: 20
+    background: 'white',
+    height: 7
   },
   soundBuffered: {
 

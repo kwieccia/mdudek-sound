@@ -3,6 +3,7 @@ import Error404 from './Error404';
 import { Link } from 'react-router-dom';
 import css from '../styles/styles';
 import SoundPlayer from '../components/SoundPlayer';
+import Radium from 'radium';
 
 import survivalGame from '../content/works/survivalGame';
 
@@ -15,7 +16,7 @@ const returnContentByUrl = (id) => {
 
 const Video = (props) => (
   <div>
-    <h3 style={styles.h3}>{props.content.name}:</h3> 
+    <h3 style={styles.h3}>{props.content.name}:</h3>
     <iframe width="100%" height={0.5625 * 600}
       src={"https://www.youtube.com/embed/" + props.content.url + "?rel=0"}
       frameborder="0" allow="autoplay; encrypted-media" allowfullscreen
@@ -23,7 +24,7 @@ const Video = (props) => (
   </div>
 );
 
-export default class Work extends Component {
+class Work extends Component {
   state = {
     playing: null
   };
@@ -73,16 +74,30 @@ export default class Work extends Component {
   }
 }
 
+export default Radium(Work);
+
 const styles = {
   h1: {...css.h1, ...{
-    marginBottom: 0
+    marginBottom: 0,
+    '@media screen and (max-width: 767px)': {
+      display: 'none'
+    }
   }},
   h2: {...css.h1, ...{
-    opacity: 1
+    opacity: 1,
+    marginTop: 40,
+    clear: 'both',
+    '@media screen and (max-width: 767px)': {
+      paddingTop: 20
+    },
+    '@media screen and (max-width: 640px)': { 
+      fontSize: '3em'
+    }
   }},
   h3: {
     textTransform: 'uppercase',
-    fontSize: '1.4rem'
+    fontSize: '1.3em',
+    margin: '3em 0 1.5em'
   },
   backLink: {
     color: 'white',

@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import css from '../styles/styles';
 import content from '../content/services';
 import { Link } from 'react-router-dom';
+import Radium from 'radium';
+const StyledLink = Radium(Link);
 
 class Entry extends Component {
   state = { maxHeight: 'auto' };
@@ -20,7 +22,7 @@ class Entry extends Component {
   componentWillUnmount = () => {
    if (this.timerHandle) {
        clearTimeout(this.timerHandle);
-       this.timerHandle = 0;               
+       this.timerHandle = 0;
    }
  };
 
@@ -28,31 +30,33 @@ class Entry extends Component {
     return (
       <article onClick={() => this.props.onClick(this.props.counter - 1)}>
         <div style={styles.serviceLink}>
+          <span style={styles.serviceArrows}>»</span>
           <span>
             <strong>{("0" + this.props.counter).slice(-2)}. </strong>
           </span>
           <h2 style={styles.serviceName}>{this.props.content.name}</h2>
           <div style={
             this.props.expanded
-              ? {...styles.serviceDescExpanded, ...{maxHeight: this.state.maxHeight + 40}}
+              ? {...styles.serviceDescExpanded, ...{maxHeight: this.state.maxHeight}}
               : styles.serviceDescHidden
           }>
             <div ref={this.descriptionRef}>
               {this.props.content.description}
-              <Link to="/contact" style={css.button}>Contact</Link>
+              <StyledLink to="/contact" style={{...css.button, ...styles.button}}>Contact</StyledLink>
             </div>
           </div>
           <span style={styles.servicePrompt}>
             {this.props.expanded ? 'hide details' : 'see details'}
           </span>
-          <span style={styles.serviceArrows}>»</span>
         </div>
       </article>
     )
   }
 }
 
-export default class Services extends Component {
+const StyledEntry = Radium(Entry);
+
+class Services extends Component {
   state = {
     expanded: content.map(e => false)
   };
@@ -74,7 +78,7 @@ export default class Services extends Component {
       <section>
         <h1 style={css.h1}>Services</h1>
         {content.map((entry, i) => (
-          <Entry content={entry} counter={i+1} key={i}
+          <StyledEntry content={entry} counter={i+1} key={i}
             onClick={this.toggle}
             expanded={this.state.expanded[i]}
           />
@@ -84,22 +88,28 @@ export default class Services extends Component {
   }
 }
 
+export default Radium(Services);
+
 const styles = {
-  serviceName: {
-    textTransform: 'uppercase'
-  },
+  serviceName: {...css.h1, ...{
+    opacity: 1,
+    margin: '7px 0 0 -3px'
+  }},
   serviceLink: {...css.link, ...{
     maxWidth: css._contentWidth,
     display: 'block',
     margin: '0 auto',
+    padding: '20px 0 23px',
+    borderBottom: '1px solid white',
     ':hover': {
-      cursor: 'pointer',
-      color: 'red'
+      cursor: 'pointer'
     }
   }},
   servicePrompt: {
     textTransform: 'uppercase',
-    textDecoration: 'underline'
+    textDecoration: 'underline',
+    marginTop: 10,
+    display: 'inline-block'
   },
   serviceDescHidden: {
     overflow: 'hidden',
@@ -109,5 +119,15 @@ const styles = {
   serviceDescExpanded: {
     overflow: 'hidden',
     transition: 'all 1s ease-in-out'
+  },
+  serviceArrows: {
+    opacity: 1,
+    fontSize: '7em',
+    margin: 0,
+    fontWeight: 700,
+    float: 'right'
+  },
+  button: {
+    margin: '10px 0 15px'
   }
 };

@@ -1,9 +1,5 @@
 .fade-enter {
     animation: showPageOnLoad 1s ease-in-out 0s alternate;
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
 }
 
 .fade-enter.fade-enter-active {}
