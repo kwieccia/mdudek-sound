@@ -1,11 +1,28 @@
-@import url('https://fonts.googleapis.com/css?family=Montserrat:300,600,700');
+@import url('https://fonts.googleapis.com/css?family=Montserrat:400,700');
 
 body {
   margin: 0;
   padding: 0;
   font-family: 'Montserrat', sans-serif;
-  font-size: 11px;
+  font-size: 16px;
   line-height: 1.2;
+  background: #111;
+}
+
+form, input, textarea {
+  font-family: 'Montserrat', sans-serif;
+}
+
+@media screen and (max-width: 640px) {
+  html, body {
+    font-size: 12px;
+  }
+}
+
+@media screen and (max-width: 1439px) {
+  html, body {
+    font-size: 14px;
+  }
 }
 
 p {
@@ -17,4 +34,69 @@ dl {
     page-break-inside: avoid;           /* Theoretically FF 20+ */
     break-inside: avoid-column;         /* IE 11 */
     display:table;                      /* Actually FF 20+ */
+}
+
+svg, svg * {
+  pointer-events: none;
+}
+
+.svgWrapper {
+  position: relative;
+}
+
+.svgWrapper:after {
+  position: absolute;
+  display: block;
+  content: "";
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
+
+nav a {
+  position: relative;
+}
+
+input:focus,
+textarea:focus {
+  outline: none;
+  box-shadow: none;
+}
+
+input:focus {
+  border-color: white !important;
+}
+
+textarea:focus {
+  background: rgba(0, 69, 210, 0.4) !important;
+}
+
+@media screen and (max-width: 925px) {
+  nav a:hover,
+  nav a:active {
+    transition: all 0.4s ease;
+    background: #0045D2;
+  }
+}
+
+@media screen and (min-width: 926px) {
+
+  nav a::after {
+    content: '';
+    display: block;
+    position: absolute;
+    height: 2px;
+    bottom: -4px;
+    left: 0;
+    width: 100%;
+    transition: all 0.4s ease;
+    transform: scaleX(0);
+    background: white;
+  }
+
+  nav a:hover::after {
+    transform: scaleX(1);
+  }
+
 }

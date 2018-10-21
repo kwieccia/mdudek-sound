@@ -93,7 +93,10 @@ export default Radium(Services);
 const styles = {
   serviceName: {...css.h1, ...{
     opacity: 1,
-    margin: '7px 0 0 -3px'
+    margin: '0.6rem 0 0',
+    '@media screen and (max-width: 640px)': {
+      fontSize: '3rem'
+    }
   }},
   serviceLink: {...css.link, ...{
     maxWidth: css._contentWidth,
@@ -109,7 +112,8 @@ const styles = {
     textTransform: 'uppercase',
     textDecoration: 'underline',
     marginTop: 10,
-    display: 'inline-block'
+    display: 'inline-block',
+    fontSize: '0.85em'
   },
   serviceDescHidden: {
     overflow: 'hidden',
@@ -118,16 +122,23 @@ const styles = {
   },
   serviceDescExpanded: {
     overflow: 'hidden',
-    transition: 'all 1s ease-in-out'
+    transition: 'all 1s ease-in-out',
+    marginBottom: 5
   },
   serviceArrows: {
     opacity: 1,
     fontSize: '7em',
     margin: 0,
-    fontWeight: 700,
-    float: 'right'
+    lineHeight: 1.15,
+    fontWeight: 600,
+    float: 'right',
+    '@media screen and (max-width: 640px)': {
+      fontSize: '5em',
+      paddingTop: 5,
+      lineHeight: 1.05
+    }
   },
   button: {
-    margin: '10px 0 15px'
+    margin: '10px 0 25px'
   }
 };

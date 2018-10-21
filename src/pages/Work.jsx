@@ -90,19 +90,20 @@ const styles = {
     '@media screen and (max-width: 767px)': {
       paddingTop: 20
     },
-    '@media screen and (max-width: 640px)': { 
+    '@media screen and (max-width: 640px)': {
       fontSize: '3em'
     }
   }},
   h3: {
     textTransform: 'uppercase',
-    fontSize: '1.3em',
+    fontSize: '1.375rem',
     margin: '3em 0 1.5em'
   },
   backLink: {
     color: 'white',
     float: 'right',
-    textTransform: 'uppercase'
+    textTransform: 'uppercase',
+    fontWeight: 'bold'
   },
   workContent: {
     maxWidth: css._contentWidth,

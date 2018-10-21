@@ -1,6 +1,7 @@
 import Player from 'react-sound';
 import React, { Component } from 'react';
 import Radium from 'radium';
+import ReactSVG from 'react-svg';
 
 class SoundPlayer extends Component {
   state = {
@@ -47,27 +48,52 @@ class SoundPlayer extends Component {
     })
   };
 
-  render() {
-    const played = (this.state.position / (this.state.duration + 0.01)) * 100 + '%';
+  renderTrigger(playing) {
     return (
       <div
         onClick={this.handleClick}
-        style={this.state.status === Player.status.PLAYING
-          ? {...styles.player, ...styles.playing}
-          : styles.player
-        }
+        style={styles[`svgWrapper${playing ? 'Active' : ''}`]} className="svgWrapper"
       >
-        {this.props.content.name}
-        <div style={styles.soundTotal}>
-          <div style={styles.soundBuffered} />
-          <div style={{...styles.soundPlayed, ...{width: played}}} />
+        <ReactSVG
+          svgStyle={styles.svg}
+          src={playing
+            ? '/' + process.env.PUBLIC_URL + 'images/ikony_pause.svg'
+            : '/' + process.env.PUBLIC_URL + 'images/ikony_play.svg'
+          }
+        />
+      </div>
+    );
+  }
+
+  render() {
+    const played = (this.state.position / (this.state.duration + 0.01)) * 100 + '%';
+    const playing = this.state.status === Player.status.PLAYING;
+    if (this.props.content.name) {
+      return ( // work details version with time-bar
+        <div style={styles.player}>
+          {this.props.content.name}
+          {this.renderTrigger(playing)}
+          <div style={playing ? [styles.soundTotal, styles.playingTotal] : styles.soundTotal}>
+            <div style={styles.soundBuffered} />
+            <div style={{...styles.soundPlayed, ...{width: played}}} />
+          </div>
+          <Player
+            url={'/' + process.env.PUBLIC_URL + 'mp3s/' + this.props.content.url}
+            playStatus={this.state.status}
+            onPlaying={this.updateSoundBar}
+          />
         </div>
+      );
+    }
+    return ( // index page simple version
+      <div style={styles.homeTrigger} className="fade-enter">
+        {this.renderTrigger(playing)}
         <Player
           url={'/' + process.env.PUBLIC_URL + 'mp3s/' + this.props.content.url}
           playStatus={this.state.status}
           onPlaying={this.updateSoundBar}
         />
-      </div>
+    </div>
     );
   }
 }
@@ -75,26 +101,52 @@ class SoundPlayer extends Component {
 export default Radium(SoundPlayer);
 
 const styles = {
+  svgWrapper: {
+    width: 48,
+    height: 48,
+    transition: 'background 0.4s ease',
+    border: '5px solid transparent',
+    borderRadius: '50%',
+    margin: '1em auto',
+    cursor: 'pointer',
+    transition: 'all 0.4s ease',
+    ':hover': {
+      background: '#0045D2',
+      boxShadow: '0 0 10px #0045D2'
+    }
+  },
+  svgWrapperActive: {
+    width: 48,
+    height: 48,
+    transition: 'background 0.4s ease',
+    border: '5px solid #0045D2',
+    borderRadius: '50%',
+    margin: '1em auto',
+    cursor: 'pointer',
+    background: '#0045D2',
+    boxShadow: '0 0 10px #0045D2'
+  },
+  svg: {
+    width: 48,
+    height: 48,
+    fill: 'white',
+  },
   player: {
-    border: '1px solid white',
     marginBottom: 15,
     textAlign: 'center',
-    padding: 15,
+    padding: 25,
     fontSize: '0.85em',
     fontWeight: 600,
     textTransform: 'uppercase',
-    transition: 'all 0.5s ease-in-out',
-    ':hover': {
-      cursor: 'pointer'
-    }
-  },
-  playing: {
-    background: 'navy'
   },
   soundTotal: {
     background: 'rgba(255, 255, 255, 0.5)',
     height: 7,
-    marginTop: 10
+    marginTop: 15,
+    transition: 'all 0.4s ease'
+  },
+  playingTotal: {
+    background: '#0045D2'
   },
   soundPlayed: {
     background: 'white',
@@ -102,5 +154,10 @@ const styles = {
   },
   soundBuffered: {
 
+  },
+  homeTrigger: {
+    position: 'fixed',
+    top: 'calc(100% - 100px)',
+    right: '3rem'
   }
 };

@@ -5,7 +5,6 @@ import Radium from 'radium';
 
 class Gear extends Component {
   render() {
-  console.warn('GEAR')
     return (
       <section>
         <h1 style={css.h1}>Gear</h1>
@@ -22,6 +21,7 @@ class Gear extends Component {
         <h1 style={css.h1}>Workplace</h1>
         <article style={styles.gearDescription}>
           <p>Lorem ipsum dolor sit amet</p>
+          <img src={'/' + process.env.PUBLIC_URL + 'images/studio_zdjecie.jpg'} style={styles.img}/>
         </article>
       </section>
     );
@@ -31,6 +31,9 @@ class Gear extends Component {
 export default Radium(Gear);
 
 const styles = {
+  img: {
+    maxWidth: '100%'
+  },
   gearDescription: {
     maxWidth: css._contentWidth,
     display: 'block',
@@ -43,7 +46,7 @@ const styles = {
   },
   gearListTitle: {
     textTransform: 'uppercase',
-    fontSize: '1.3em',
+    fontSize: '1.375rem',
     margin: '0 0 5px',
     fontWeight: 800
   },
@@ -57,9 +60,13 @@ const styles = {
   },
   gearListing: {
     columnCount: 3,
-    marginBottom: 50,
+    marginBottom: '5rem',
     '@media screen and (max-width: 640px)': {
       columnCount: 2
+    },
+    '@media screen and (max-width: 429px)': {
+      marginTop: '2rem',
+      columnCount: 1
     }
   }
 };

@@ -43,17 +43,26 @@ const styles = {
     padding: '20px 0 23px'
   }},
   workPrompt: {
-    textDecoration: 'underline'
+    textDecoration: 'underline',
+    fontSize: '0.85em'
   },
   workName: {...css.h1, ...{
     opacity: 1,
-    margin: '7px 0 10px -3px'
+    margin: '7px 0 10px',
+    '@media screen and (max-width: 640px)': {
+      fontSize: '3em',
+      marginBottom: 12
+    }
   }},
   workArrows: {
     opacity: 1,
     fontSize: '7em',
     margin: 0,
     fontWeight: 700,
-    float: 'right'
+    float: 'right',
+    '@media screen and (max-width: 640px)': {
+      fontSize: '5em',
+      paddingTop: 5
+    }
   }
 };
