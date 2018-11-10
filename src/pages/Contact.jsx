@@ -54,7 +54,7 @@ class Contact extends Component {
       <section>
         <h1 style={css.h1}>Contact</h1>
         <p style={styles.paragraph}>
-          Email: michalesdudek@gmail.com<br/>
+          Email: contact@michaldudek.website<br/>
           mob.: + 48 502 764 786
         </p>
         <form id="contactForm" style={styles.form} method="POST" action="mailer.php" onSubmit={this.handleSubmit}>
