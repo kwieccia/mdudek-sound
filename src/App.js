@@ -39,7 +39,7 @@ class AppContent extends Component {
   // Preload images for fluid background fade between subpages.
   preloadBackgrounds = () => {
     ['index', 'works', 'gear', 'services', 'contact', 'works_details']
-      .map(name => '/' + process.env.PUBLIC_URL + 'images/tla_' + name + '04_bg.jpg')
+      .map(name => '/' + process.env.PUBLIC_URL + 'images/' + name + '04_bg.jpg')
       .forEach((picture) => {
         const img = new Image();
         img.src = picture;
@@ -155,9 +155,9 @@ export default class WrappedApp extends Component {
   )
 }
 
-const switchBackground = (page) => { 
+const switchBackground = (page) => {
   const returnUrl = (img) =>
-    'url("/' + process.env.PUBLIC_URL + 'images/tla_' + img + '04_bg.jpg") center center / cover no-repeat';
+    'url("/' + process.env.PUBLIC_URL + 'images/' + img + '04_bg.jpg") center center / cover no-repeat';
   switch (page) {
     case '/':         return returnUrl('index');
     case '/works':    return returnUrl('works');

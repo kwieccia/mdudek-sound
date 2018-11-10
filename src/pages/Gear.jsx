@@ -36,23 +36,26 @@ const styles = {
   gearDescription: {
     maxWidth: css._contentWidth,
     display: 'block',
-    margin: '0 auto'
+    margin: '0 auto',
+    '@media screen and (max-width: 640px)': {
+      marginTop: 50
+    }
   },
   gearList: {
-    margin: '0 0 25px',
+    margin: '0 0 40px',
     padding: 0,
     textTransform: 'uppercase'
   },
   gearListTitle: {
     textTransform: 'uppercase',
     fontSize: '1.375rem',
-    margin: '0 0 5px',
+    margin: '0 0 10px',
     fontWeight: 800
   },
   gearListItem: {
     display: 'list-item',
-    fontSize: '1.1em',
-    lineHeight: 1.6
+    fontSize: '1em',
+    lineHeight: 2.2
   },
   gearListItems: {
     margin: '0 0 0 16px'
@@ -61,11 +64,11 @@ const styles = {
     columnCount: 3,
     columnGap: 40,
     marginBottom: '5rem',
-    '@media screen and (max-width: 925px)': {
+    '@media screen and (max-width: 805px)': {
+      marginTop: 50,
       columnCount: 2
     },
-    '@media screen and (max-width: 640px)': {
-      marginTop: '2rem',
+    '@media screen and (max-width: 480px)': {
       columnCount: 1
     }
   }
