@@ -1,5 +1,9 @@
 @import url('https://fonts.googleapis.com/css?family=Montserrat:400,700');
 
+html {
+  
+}
+
 body {
   margin: 0;
   padding: 0;
@@ -7,6 +11,7 @@ body {
   font-size: 16px;
   line-height: 1.2;
   background: #111;
+  position: relative;
 }
 
 form, input, textarea {

@@ -20,7 +20,6 @@ class Gear extends Component {
         </article>
         <h1 style={css.h1}>Workplace</h1>
         <article style={styles.gearDescription}>
-          <p>Lorem ipsum dolor sit amet</p>
           <img src={'/' + process.env.PUBLIC_URL + 'images/studio_zdjecie.jpg'} style={styles.img}/>
         </article>
       </section>
@@ -60,11 +59,12 @@ const styles = {
   },
   gearListing: {
     columnCount: 3,
+    columnGap: 40,
     marginBottom: '5rem',
-    '@media screen and (max-width: 640px)': {
+    '@media screen and (max-width: 925px)': {
       columnCount: 2
     },
-    '@media screen and (max-width: 429px)': {
+    '@media screen and (max-width: 640px)': {
       marginTop: '2rem',
       columnCount: 1
     }

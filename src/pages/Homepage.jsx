@@ -11,14 +11,17 @@ class Homepage extends Component {
     return (
       <React.Fragment>
         <div style={styles.homeWrapper}>
-          <h1 style={styles.h1}>Giving live to your world</h1>
+          <h1 style={styles.h1}>MAKING YOUR WORLD ALIVE</h1>
           <div style={styles.homeSlogan}>
             <span style={styles.homeSloganItem}>Composition</span>
             <span style={styles.homeSloganItem}>Sound design</span>
             <span style={styles.homeSloganItem}>Mix</span>
             <span style={styles.homeSloganItem}>Post production</span>
           </div>
-          <StyledLink to='/works' style={styles.homeButton}>Check latest works</StyledLink>
+          <div>
+            <a href="https://youtu.be/IJZn8qw7EeA" target="_blank" style={styles.homeButton}>see how i work</a>
+            <StyledLink to='/works' style={styles.homeButton}>Check latest works</StyledLink>
+          </div>
         </div>
       </React.Fragment>
     );
@@ -52,6 +55,8 @@ const styles = {
     margin: '0 1rem'
   },
   homeButton: {...css.button, ...{
-    marginTop: '1rem'
+    marginTop: '1rem',
+    marginLeft: '1rem',
+    marginRight: '1rem'
   }}
 };

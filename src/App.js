@@ -31,7 +31,6 @@ class AppContent extends Component {
   }
 
   render() {
-    console.warn(this.state.menuExpanded)
     return (
       <div style={styles.pageWrapper(this.props.location.pathname)}>
         <header style={styles.pageHeader}>
@@ -78,7 +77,7 @@ class AppContent extends Component {
           </TransitionGroup>
         </main>
         {this.props.location.pathname === '/' ? <SoundPlayer
-          content={{ url: 'soulpete.mp3' }}
+          content={{ url: 'portfolio_muzyka_C_studio_01.mp3' }}
           counter={1}
           onStart={() => null}
           current={1}
@@ -110,6 +109,11 @@ const switchBackground = (page) => {
     case '/services': return returnUrl('services');
     case '/contact':  return returnUrl('contact');
     case '/works/survival-game':
+    case '/works/casual-game':
+    case '/works/mystery-game':
+    case '/works/farm-game':
+    case '/works/logic-game':
+    case '/works/horror-game':
       return returnUrl('works_details');
     default: return '#111';
   }
@@ -124,7 +128,7 @@ const styles = {
     alignItems: 'center',
     flexDirection: 'column',
     padding: '0 30px',
-    transition: 'all 1s ease-in-out'
+    transition: 'all 1s ease-in-out' 
   }),
   pageContent: {
     maxWidth: '100%',

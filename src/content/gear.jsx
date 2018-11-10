@@ -1,37 +1,53 @@
 export default [
   {
-    name: "Microphones",
+    name: "Outboard",
     list: [
-      "Shure XY78",
-      "AKG 678"
+      "Akai MPC 4000",
+      "Looptrotter Audio SA2RATE",
+      "TLAudio Fatman-1",
+      "Golden Age Project PRE-73",
+      "Yamaha Motif Rack XS",
+      "M-AUDIO Axiom 61",
     ]
   },
     {
-      name: "Microphones",
+      name: "Audio Interface",
       list: [
-        "Shure XY78",
-        "AKG 678"
+        "Apogee Quartet"
       ]
     },
       {
-        name: "Microphones",
+        name: "Mics",
         list: [
-          "Shure XY78",
-          "AKG 678"
+          "Brauner Phantom C",
+          "Oktava mk-319",
+          "Shure sm57",
         ]
       },
         {
-          name: "Microphones",
+          name: "Monitors",
           list: [
-            "Shure XY78",
-            "AKG 678"
+            "KRK VXT 8"
           ]
         },
           {
-            name: "Microphones",
+            name: "Recorders",
             list: [
-              "Shure XY78",
-              "AKG 678"
+              "ZOOM H5"
             ]
           },
+            {
+              name: "Software",
+              list: [
+                "Pro Tools",
+                "Cubase",
+                "Native Instruments",
+                "Waves",
+                "Slate Digital",
+                "Fabfilter",
+                "Sugar Bytes",
+                "Heavyocity",
+                "Celemony",
+              ]
+            },
 ];

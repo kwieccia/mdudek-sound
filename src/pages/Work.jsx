@@ -6,17 +6,26 @@ import SoundPlayer from '../components/SoundPlayer';
 import Radium from 'radium';
 
 import survivalGame from '../content/works/survivalGame';
+import casualGame from '../content/works/casualGame';
+import logicGame from '../content/works/logicGame';
+import mysteryGame from '../content/works/mysteryGame';
+import farmGame from '../content/works/farmGame';
+import horrorGame from '../content/works/horrorGame';
 
 const returnContentByUrl = (id) => {
   const works = {
-    'survival-game': survivalGame
+    'survival-game': survivalGame,
+    'casual-game': casualGame,
+    'logic-game': logicGame,
+    'mystery-game': mysteryGame,
+    'farm-game': farmGame,
+    'horror-game': horrorGame
   };
   return works[id];
 };
 
 const Video = (props) => (
-  <div>
-    <h3 style={styles.h3}>{props.content.name}:</h3>
+  <div style={styles.videoWrapper}>
     <iframe width="100%" height={0.5625 * 600}
       src={"https://www.youtube.com/embed/" + props.content.url + "?rel=0"}
       frameborder="0" allow="autoplay; encrypted-media" allowfullscreen
@@ -61,7 +70,10 @@ class Work extends Component {
               : null
             }
             {content.video
-              ? content.video.map((video, i) => <Video content={video} key={i} />)
+              ? <div>
+                <h3 style={styles.h3}>Sound design samples:</h3>
+                {content.video.map((video, i) => <Video content={video} key={i} />)}
+              </div>
               : null
             }
           </article>
@@ -110,6 +122,9 @@ const styles = {
     margin: '0 auto'
   },
   workCategory: {
-    textTransform: 'uppercase'
+    //textTransform: 'uppercase'
+  },
+  videoWrapper: {
+    marginBottom: '2rem'
   }
 };
