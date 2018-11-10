@@ -19,118 +19,124 @@ const StyledLink = Radium(Link);
 class AppContent extends Component {
 
   state = {
-    menuExpanded: false,
-    playerActive: false,
-    popup: false,
-    homeEntry: false
+    menuExpanded: false, // hamburger menu
+    playerActive: false, // sound player
+    popup: false, // "See how I work" popup
+    homeEntry: false // flag for entry homepage animation
   }
 
   componentDidMount() {
-    // preload background images
-    [
-      'index',
-      'works',
-      'gear',
-      'services',
-      'contact',
-      'works_details'
-    ].map(name => '/' + process.env.PUBLIC_URL + 'images/tla_' + name + '04_bg.jpg').forEach((picture) => {
-        const img = new Image();
-        img.src = picture;
-    });
-    if (this.props.location.pathname === '/') {
-      this.setState({homeEntry: true})
-    }
+    this.preloadBackgrounds();
+    this.setEntryHomepageAnimation();
   }
 
   componentDidUpdate(prevProps) {
     if (this.props.location.pathname !== prevProps.location.pathname) {
-      this.setState({playerActive: false, homeEntry: false});
+      this.locationChangeHandler();
     }
   }
 
-  toggleMenu = () => {
-    this.setState({ menuExpanded: !this.state.menuExpanded });
+  // Preload images for fluid background fade between subpages.
+  preloadBackgrounds = () => {
+    ['index', 'works', 'gear', 'services', 'contact', 'works_details']
+      .map(name => '/' + process.env.PUBLIC_URL + 'images/tla_' + name + '04_bg.jpg')
+      .forEach((picture) => {
+        const img = new Image();
+        img.src = picture;
+      });
+  };
+
+  // If website was opened on homepage, set flag for entry animation.
+  setEntryHomepageAnimation = () => {
+    if (this.props.location.pathname === '/') {
+      this.setState({homeEntry: true});
+    }
   }
 
-  hideMenu = () => {
-    this.setState({ menuExpanded: false });
+  // Turn off homepage sound player and entry animation on page change.
+  locationChangeHandler = () => this.setState({ playerActive: false, homeEntry: false });
+
+  // Hamburger navigation on small screens.
+  toggleMenu = () => this.setState({ menuExpanded: !this.state.menuExpanded });
+  hideMenu = () => this.setState({ menuExpanded: false });
+
+  // Is sound player active? Then styles should be changed.
+  playerActive = () => this.setState({playerActive: true});
+  playerStopped = () => this.setState({playerActive: false});
+
+  // Is "See how I work" popup opened? Then sound player should be deactivated.
+  popup = (opened) => this.setState({popup: opened, playerActive: false});
+
+  renderHeader() {
+    return (
+      <header style={styles.pageHeader}>
+        <div style={styles.pageLogo}>
+          <Link style={styles.pageTitle} to="/">Michael Dudek</Link>
+          <span style={styles.pageCaption}>sound portfolio</span>
+        </div>
+        <nav
+          style={this.state.menuExpanded
+            ? [styles.pageMenu, styles.pageMenuVisible]
+            : styles.pageMenu
+          }
+          onClick={this.hideMenu}
+        >
+          <StyledLink style={styles.pageMenuLink} to="/works">works</StyledLink>
+          <StyledLink style={styles.pageMenuLink} to="/services">services</StyledLink>
+          <StyledLink style={styles.pageMenuLink} to="/gear">gear & workplace</StyledLink>
+          <StyledLink style={styles.pageMenuLink} to="/contact">contact</StyledLink>
+        </nav>
+        <div style={styles.hamburger} onClick={this.toggleMenu}>
+          <div style={styles.hamburgerLine1} />
+          <div style={styles.hamburgerLine2} />
+          <div style={styles.hamburgerLine3} />
+        </div>
+      </header>
+    );
   }
-
-  playerActive = () => {
-    this.setState({playerActive: true})
-  };
-
-  playerStopped = () => {
-    this.setState({playerActive: false})
-  };
-
-  popup = (opened) => {
-    this.setState({popup:opened, playerActive: false})
-  };
 
   render() {
+    const {playerActive, homeEntry} = this.state;
+    const urlPath = this.props.location.pathname;
+
     return (
       <div style={styles.perspective} className="fade-enter-page">
-      <div style={[
-          styles.pageBackground(this.props.location.pathname, this.state.playerActive)
-      ]} />
-      <div style={styles.pageWrapper}>
-        <header style={styles.pageHeader}>
-          <div style={styles.pageLogo}>
-            <Link style={styles.pageTitle} to="/">Michael Dudek</Link>
-            <span style={styles.pageCaption}>sound portfolio</span>
-          </div>
-          <nav
-            style={this.state.menuExpanded
-              ? [styles.pageMenu, styles.pageMenuVisible]
-              : styles.pageMenu
-            }
-            onClick={this.hideMenu}
-          >
-            <StyledLink style={styles.pageMenuLink} to="/works">works</StyledLink>
-            <StyledLink style={styles.pageMenuLink} to="/services">services</StyledLink>
-            <StyledLink style={styles.pageMenuLink} to="/gear">gear & workplace</StyledLink>
-            <StyledLink style={styles.pageMenuLink} to="/contact">contact</StyledLink>
-          </nav>
-          <div style={styles.hamburger} onClick={this.toggleMenu}>
-            <div style={styles.hamburgerLine1} />
-            <div style={styles.hamburgerLine2} />
-            <div style={styles.hamburgerLine3} />
-          </div>
-        </header>
-        <main style={styles.pageContent(this.props.location.pathname, this.state.playerActive)}>
-          <TransitionGroup style={styles.pageTransitionWrapper}>
-            <CSSTransition
-              key={this.props.location.key}
-              timeout={{ enter: 1000, exit: 0 }}
-              classNames={'fade'}
-              exit={false}
-            >
-              <Switch>
-                <Route exact path="/"
-                  render={(props) => <Homepage {...props}
-                    popup={this.popup}
-                    shouldShine={this.state.homeEntry}
-                  />}
-                />
-                <Route path="/contact" component={Contact} />
-                <Route path="/gear" component={Gear} />
-                <Route path="/services" component={Services} />
-                <Route exact path="/works" component={Works} />
-                <Route path="/works/:id" component={Work} />
-                <Route component={Error404} />
-              </Switch>
-            </CSSTransition>
-          </TransitionGroup>
-        </main>
-        {this.props.location.pathname === '/' && !this.state.popup ? <SoundPlayer
-          content={{ url: 'portfolio_muzyka_C_studio_01.mp3' }}
-          counter={1}
-          onStart={this.playerActive}
-          onStop={this.playerStopped}
-          current={1}
-        /> : null}
+        <div style={styles.pageBackground(urlPath, playerActive)} />
+        <div style={styles.pageWrapper}>
+          {this.renderHeader()}
+          <main style={styles.pageContent(urlPath, playerActive)}>
+            <TransitionGroup style={styles.pageTransitionWrapper}>
+              <CSSTransition
+                key={this.props.location.key}
+                timeout={{ enter: 1000, exit: 0 }}
+                classNames={'fade'}
+                exit={false}
+              >
+                <Switch>
+                  <Route exact path="/"
+                    render={(props) =>
+                      <Homepage {...props} popup={this.popup} entryAnimation={homeEntry} />
+                    }
+                  />
+                  <Route path="/contact" component={Contact} />
+                  <Route path="/gear" component={Gear} />
+                  <Route path="/services" component={Services} />
+                  <Route exact path="/works" component={Works} />
+                  <Route path="/works/:id" component={Work} />
+                  <Route component={Error404} />
+                </Switch>
+              </CSSTransition>
+            </TransitionGroup>
+          </main>
+          {urlPath === '/' && !this.state.popup ? (
+            <SoundPlayer
+              content={{ url: 'portfolio_muzyka_C_studio_01.mp3' }}
+              counter={1}
+              onStart={this.playerActive}
+              onStop={this.playerStopped}
+              current={1}
+            />
+          ) : null}
         </div>
       </div>
     );
@@ -149,11 +155,11 @@ export default class WrappedApp extends Component {
   )
 }
 
-const switchBackground = (page) => {
+const switchBackground = (page) => { 
   const returnUrl = (img) =>
     'url("/' + process.env.PUBLIC_URL + 'images/tla_' + img + '04_bg.jpg") center center / cover no-repeat';
   switch (page) {
-    case '/': return returnUrl('index');
+    case '/':         return returnUrl('index');
     case '/works':    return returnUrl('works');
     case '/gear':     return returnUrl('gear');
     case '/services': return returnUrl('services');
@@ -165,7 +171,8 @@ const switchBackground = (page) => {
     case '/works/logic-game':
     case '/works/horror-game':
       return returnUrl('works_details');
-    default: return '#090909';
+    default:
+      return returnUrl('index');
   }
 };
 
@@ -174,14 +181,21 @@ const bgOpacity = (page, playerActive) => {
     return 0.8;
   }
   return 1;
-}
+};
 
 const textOpacity = (page, playerActive) => {
   if (page === '/' && playerActive) {
-    return 0.8;
+    return 0.08;
   }
   return 1;
-}
+};
+
+const textShadow = (page, playerActive) => {
+  if (page === '/' && playerActive) {
+    return '0 0 15px black';
+  }
+  return 'none';
+};
 
 const styles = {
   perspective: {
@@ -202,6 +216,7 @@ const styles = {
     transition: 'all 1s ease-in-out',
     boxShadow: page === '/' ? 'inset 0 -100px 100px 0 transparent': 'inset 0 -100px 100px 0 #090909',
     transform: 'translateZ(-2px) scale(2)',
+    willChange: 'transform',
     '@media screen and (orientation: portrait)': {
       backgroundSize: 'auto 100%'
     }
@@ -223,7 +238,8 @@ const styles = {
     textAlign: 'left',
     paddingBottom: 80,
     transition: 'all 1s ease-out',
-    opacity: textOpacity(page, playerActive)
+    opacity: textOpacity(page, playerActive),
+    textShadow: textShadow(page, playerActive)
   }),
   pageHeader: {
     textTransform: 'uppercase',
@@ -294,7 +310,8 @@ const styles = {
   },
   pageTransitionWrapper: {
     position: 'relative',
-    animation: 'showPageOnLoad 1s ease-in-out 0s alternate'
+    animation: 'showPageOnLoad 1s ease-in-out 0s alternate',
+    display: 'flex'
   },
   hamburger: {
     height: 30,

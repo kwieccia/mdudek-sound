@@ -125,6 +125,7 @@ const styles = {
     color: 'white',
     display: 'block',
     transition: 'all 0.4s ease',
-    boxSizing: 'border-box'
+    boxSizing: 'border-box',
+    overflow: 'auto'
   }
 };

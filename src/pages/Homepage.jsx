@@ -23,34 +23,39 @@ class Homepage extends Component {
     this.props.popup(false);
   };
 
-  render() { 
+  render() {
+    const animate = this.props.entryAnimation;
+
     return (
       <React.Fragment>
         <div style={styles.homeWrapper}>
-          <h1 style={styles.h1}  className={this.props.shouldShine ? 'fade-enter-text' : null}>MAKING YOUR WORLD ALIVE</h1>
+          <h1 style={styles.h1} className={animate ? 'fade-enter-text' : null}>
+            MAKING YOUR WORLD ALIVE
+          </h1>
           <div style={styles.homeSlogan}>
             <span style={styles.homeSloganItem}>Composition</span>
             <span style={styles.homeSloganItem}>Sound design</span>
             <span style={styles.homeSloganItem}>Mix</span>
             <span style={styles.homeSloganItem}>Post production</span>
           </div>
-          <div style={styles.buttons} className={this.props.shouldShine ? 'fade-buttons' : null}>
+          <div style={styles.buttons} className={animate ? 'fade-buttons' : null}>
             <a onClick={this.openPopup} style={styles.homeButton}>see how i work</a>
-            <StyledLink to='/works' style={styles.homeButton}>Check latest works</StyledLink>
+            <StyledLink to='/works/survival-game' style={styles.homeButton}>Check the latest work</StyledLink>
           </div>
         </div>
-        {this.state.popup ? <Popup close={this.closePopup}>
-          <Iframe url="https://www.youtube.com/embed/IJZn8qw7EeA?wmode=opaque"
-            styles={{ zIndex:0 }}
-            width="100%"
-            height="100%"
-            id="myId"
-            className="myClassname"
-            display="initial"
-            position="relative"
-            allowFullScreen
-          />
-        </Popup> : null}
+        {this.state.popup ? (
+          <Popup close={this.closePopup}>
+            <Iframe url="https://www.youtube.com/embed/IJZn8qw7EeA?wmode=opaque"
+              styles={{ zIndex: 0 }}
+              width="100%"
+              height="100%"
+              id="IJZn8qw7EeA"
+              display="initial"
+              position="relative"
+              allowFullScreen
+            />
+        </Popup>
+      ) : null}
       </React.Fragment>
     );
   }
@@ -63,7 +68,8 @@ const styles = {
     opacity: 1,
     textAlign: 'center',
     marginBottom: '1.5rem',
-    fontWeight: 800
+    fontWeight: 800,
+    letterSpacing: -0.5
   }},
   homeWrapper: {
     minHeight: 'calc(100vh - 200px)',
@@ -93,7 +99,7 @@ const styles = {
     textAlign: 'center'
   }},
   buttons: {
-    '@media screen and (max-width: 540px)': {
+    '@media screen and (max-width: 570px)': {
         display: 'flex',
         flexDirection: 'column'
     }
