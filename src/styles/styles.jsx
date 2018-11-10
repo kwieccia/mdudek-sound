@@ -3,11 +3,11 @@ export default {
   _contentWidth: 960,
   h1: {
     fontSize: '5.625rem',
-    opacity: 0.3,
+    opacity: 0.2,
     textTransform: 'uppercase',
     fontWeight: 600,
     lineHeight: 1,
-    margin: '20px 0 50px',
+    margin: '20px 0 70px',
     '@media screen and (max-width: 640px)': {
       fontSize: '3em',
       margin: '10px 0 20px'
@@ -19,7 +19,7 @@ export default {
   },
   button: {
     border: '1px solid white',
-    padding: '10px 15px',
+    padding: '18px 30px',
     display: 'inline-block',
     color: 'white',
     background: 'transparent',

@@ -53,7 +53,7 @@ class Contact extends Component {
     return (
       <section>
         <h1 style={css.h1}>Contact</h1>
-        <p>
+        <p style={styles.paragraph}>
           Email: michalesdudek@gmail.com<br/>
           mob.: + 48 502 764 786
         </p>
@@ -78,6 +78,9 @@ class Contact extends Component {
 export default Radium(Contact);
 
 const styles = {
+  paragraph: {
+    lineHeight: 2
+  },
   form: {
     marginTop: 50
   },

@@ -1,13 +1,30 @@
 import React, { Component } from 'react';
 import css from '../styles/styles';
 import SoundPlayer from '../components/SoundPlayer';
+import Popup from '../components/Popup';
 import Radium from 'radium';
 import { Link } from 'react-router-dom';
+import Iframe from 'react-iframe';
 
 const StyledLink = Radium(Link);
 
 class Homepage extends Component {
+
+  state = {popup: false};
+
+  openPopup = (event) => {
+    event.preventDefault();
+    this.setState({popup: true});
+    this.props.popup(true);
+  };
+
+  closePopup = () => {
+    this.setState({popup: false});
+    this.props.popup(false);
+  };
+
   render() {
+    console.warn(this.props.popupOpened)
     return (
       <React.Fragment>
         <div style={styles.homeWrapper}>
@@ -18,11 +35,23 @@ class Homepage extends Component {
             <span style={styles.homeSloganItem}>Mix</span>
             <span style={styles.homeSloganItem}>Post production</span>
           </div>
-          <div>
-            <a href="https://youtu.be/IJZn8qw7EeA" target="_blank" style={styles.homeButton}>see how i work</a>
+          <div style={styles.buttons}>
+            <a onClick={this.openPopup} style={styles.homeButton}>see how i work</a>
             <StyledLink to='/works' style={styles.homeButton}>Check latest works</StyledLink>
           </div>
         </div>
+        {this.state.popup ? <Popup close={this.closePopup}>
+          <Iframe url="https://www.youtube.com/embed/IJZn8qw7EeA?wmode=opaque"
+            styles={{ zIndex:0 }}
+            width="100%"
+            height="100%"
+            id="myId"
+            className="myClassname"
+            display="initial"
+            position="relative"
+            allowFullScreen
+          />
+        </Popup> : null}
       </React.Fragment>
     );
   }
@@ -34,14 +63,18 @@ const styles = {
   h1: {...css.h1, ...{
     opacity: 1,
     textAlign: 'center',
-    marginBottom: '1.5rem'
+    marginBottom: '1.5rem',
+    fontWeight: 800
   }},
   homeWrapper: {
-    minHeight: 'calc(100vh - 220px)',
+    minHeight: 'calc(100vh - 200px)',
     justifyContent: 'center',
     alignItems: 'center',
     display: 'flex',
-    flexDirection: 'column'
+    flexDirection: 'column',
+    '@media screen and (min-width: 1440px)': {
+        minHeight: 'calc(100vh - 300px)',
+    }
   },
   homeSlogan: {
     textTransform: 'uppercase',
@@ -57,6 +90,13 @@ const styles = {
   homeButton: {...css.button, ...{
     marginTop: '1rem',
     marginLeft: '1rem',
-    marginRight: '1rem'
-  }}
+    marginRight: '1rem',
+    textAlign: 'center'
+  }},
+  buttons: {
+    '@media screen and (max-width: 540px)': {
+        display: 'flex',
+        flexDirection: 'column'
+    }
+  }
 };

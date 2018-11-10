@@ -94,7 +94,7 @@ const styles = {
   serviceName: {...css.h1, ...{
     opacity: 1,
     margin: '0.6rem 0 0',
-    '@media screen and (max-width: 640px)': {
+    '@media screen and (max-width: 840px)': {
       fontSize: '3rem'
     }
   }},
@@ -102,8 +102,9 @@ const styles = {
     maxWidth: css._contentWidth,
     display: 'block',
     margin: '0 auto',
-    padding: '20px 0 23px',
+    padding: '40px 80px 40px 0',
     borderBottom: '1px solid white',
+    position: 'relative',
     ':hover': {
       cursor: 'pointer'
     }
@@ -128,14 +129,20 @@ const styles = {
   serviceArrows: {
     opacity: 1,
     fontSize: '7em',
-    margin: 0,
+    margin: '-8px 0 0 0',
     lineHeight: 1.15,
     fontWeight: 600,
-    float: 'right',
+    position: 'absolute',
+    right: 0,
+    top: '50%',
+    transform: 'translateY(-50%)',
     '@media screen and (max-width: 640px)': {
       fontSize: '5em',
-      paddingTop: 5,
+      marginTop: -15,
       lineHeight: 1.05
+    },
+    '@media screen and (max-width: 470px)': {
+      display: 'none'
     }
   },
   button: {

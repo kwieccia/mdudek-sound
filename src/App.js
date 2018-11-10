@@ -19,7 +19,15 @@ const StyledLink = Radium(Link);
 class AppContent extends Component {
 
   state = {
-    menuExpanded: false
+    menuExpanded: false,
+    playerActive: false,
+    popup: false
+  }
+
+  componentDidUpdate(prevProps) {
+    if (this.props.location.pathname !== prevProps.location.pathname) {
+      this.setState({playerActive: false})
+    }
   }
 
   toggleMenu = () => {
@@ -30,9 +38,25 @@ class AppContent extends Component {
     this.setState({ menuExpanded: false });
   }
 
+  playerActive = () => {
+    this.setState({playerActive: true})
+  };
+
+  playerStopped = () => {
+    this.setState({playerActive: false})
+  };
+
+  popup = (opened) => {
+    this.setState({popup:opened, playerActive: false})
+  };
+
   render() {
     return (
-      <div style={styles.pageWrapper(this.props.location.pathname)}>
+      <div style={styles.perspective}>
+      <div style={[
+          styles.pageBackground(this.props.location.pathname, this.state.playerActive)
+      ]} />
+      <div style={styles.pageWrapper}>
         <header style={styles.pageHeader}>
           <div style={styles.pageLogo}>
             <Link style={styles.pageTitle} to="/">Michael Dudek</Link>
@@ -56,7 +80,7 @@ class AppContent extends Component {
             <div style={styles.hamburgerLine3} />
           </div>
         </header>
-        <main style={styles.pageContent}>
+        <main style={styles.pageContent(this.props.location.pathname, this.state.playerActive)}>
           <TransitionGroup style={styles.pageTransitionWrapper}>
             <CSSTransition
               key={this.props.location.key}
@@ -65,7 +89,11 @@ class AppContent extends Component {
               exit={false}
             >
               <Switch>
-                <Route exact path="/" component={Homepage}/>
+                <Route exact path="/"
+                  render={(props) => <Homepage {...props}
+                    popup={this.popup}
+                  />}
+                />
                 <Route path="/contact" component={Contact} />
                 <Route path="/gear" component={Gear} />
                 <Route path="/services" component={Services} />
@@ -76,12 +104,14 @@ class AppContent extends Component {
             </CSSTransition>
           </TransitionGroup>
         </main>
-        {this.props.location.pathname === '/' ? <SoundPlayer
+        {this.props.location.pathname === '/' && !this.state.popup ? <SoundPlayer
           content={{ url: 'portfolio_muzyka_C_studio_01.mp3' }}
           counter={1}
-          onStart={() => null}
+          onStart={this.playerActive}
+          onStop={this.playerStopped}
           current={1}
         /> : null}
+        </div>
       </div>
     );
   }
@@ -101,9 +131,9 @@ export default class WrappedApp extends Component {
 
 const switchBackground = (page) => {
   const returnUrl = (img) =>
-    'url("/' + process.env.PUBLIC_URL + 'images/tla_' + img + '04_bg.jpg") center center / cover fixed';
+    'url("/' + process.env.PUBLIC_URL + 'images/tla_' + img + '04_bg.jpg") center center / cover no-repeat';
   switch (page) {
-    case '/':         return returnUrl('index');
+    case '/': return returnUrl('index');
     case '/works':    return returnUrl('works');
     case '/gear':     return returnUrl('gear');
     case '/services': return returnUrl('services');
@@ -115,27 +145,66 @@ const switchBackground = (page) => {
     case '/works/logic-game':
     case '/works/horror-game':
       return returnUrl('works_details');
-    default: return '#111';
+    default: return '#090909';
   }
 };
 
+const bgOpacity = (page, playerActive) => {
+  if (page === '/' && !playerActive) {
+    return 0.8;
+  }
+  return 1;
+}
+
+const textOpacity = (page, playerActive) => {
+  if (page === '/' && playerActive) {
+    return 0.8;
+  }
+  return 1;
+}
+
 const styles = {
-  pageWrapper: (page) => ({
+  perspective: {
+    height: '100vh',
+    perspective: 2,
+    overflowY: 'auto',
+    overflowX: 'hidden',
+    position: 'relative'
+  },
+  pageBackground: (page, playerActive) => ({
     background: switchBackground(page),
+    opacity: bgOpacity(page, playerActive),
+    minHeight: '100vh',
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    width: '100vw',
+    transition: 'all 1s ease-in-out',
+    boxShadow: page === '/' ? 'inset 0 -100px 100px 0 transparent': 'inset 0 -100px 100px 0 #090909',
+    transform: 'translateZ(-2px) scale(2)',
+    '@media screen and (orientation: portrait)': {
+      backgroundSize: 'auto 100%'
+    }
+  }),
+  pageWrapper: {
+    position: 'relative',
+    zIndex: 9,
     minHeight: '100vh',
     color: 'white',
     display: 'flex',
     alignItems: 'center',
     flexDirection: 'column',
     padding: '0 30px',
-    transition: 'all 1s ease-in-out' 
-  }),
-  pageContent: {
+    transition: 'all 1s ease-in-out',
+  },
+  pageContent: (page, playerActive) => ({
     maxWidth: '100%',
     width: css._wrapperWidth,
     textAlign: 'left',
-    paddingBottom: 80
-  },
+    paddingBottom: 80,
+    transition: 'all 1s ease-out',
+    opacity: textOpacity(page, playerActive)
+  }),
   pageHeader: {
     textTransform: 'uppercase',
     maxWidth: '100%',
@@ -145,6 +214,9 @@ const styles = {
     fontSize: '0.875rem',
     '@media screen and (max-width: 925px)': {
       padding: '25px 0 40px'
+    },
+    '@media screen and (min-width: 1440px)': {
+      padding: '80px 0'
     }
   },
   pageLogo: {
@@ -159,7 +231,7 @@ const styles = {
     '@media screen and (max-width: 925px)': {
       flexDirection: 'column',
       display: 'flex',
-      position: 'fixed',
+      position: 'absolute',
       background: '#222035',
       top: 70,
       left: 0,
@@ -211,7 +283,7 @@ const styles = {
     flexDirection: 'column',
     justifyContent: 'space-between',
     alignItems: 'flex-end',
-    position: 'fixed',
+    position: 'absolute',
     zIndex: 100,
     right: 30,
     top: 20,

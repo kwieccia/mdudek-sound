@@ -13,12 +13,15 @@ class SoundPlayer extends Component {
 
   componentWillReceiveProps(nextProps) {
     if (nextProps.current !== nextProps.counter) {
-      this.setState({ status: Player.status.PAUSED });
+      this.setState({ position: 0 });
+      this.setState({ status: Player.status.STOPPED });
     }
   }
 
   pause = () => {
-    this.setState({ status: Player.status.PAUSED });
+    this.setState({ position: 0 });
+    this.setState({ status: Player.status.STOPPED });
+    this.props.onStop && this.props.onStop();
   };
 
   play = () => {
@@ -48,6 +51,10 @@ class SoundPlayer extends Component {
     })
   };
 
+  handleFinishedPlaying = () => {
+    this.setState({ position: 0 });
+  };
+
   renderTrigger(playing) {
     return (
       <div
@@ -57,7 +64,7 @@ class SoundPlayer extends Component {
         <ReactSVG
           svgStyle={styles.svg}
           src={playing
-            ? '/' + process.env.PUBLIC_URL + 'images/ikony_pause.svg'
+            ? '/' + process.env.PUBLIC_URL + 'images/stop.svg'
             : '/' + process.env.PUBLIC_URL + 'images/ikony_play.svg'
           }
         />
@@ -85,13 +92,15 @@ class SoundPlayer extends Component {
         </div>
       );
     }
-    return ( // index page simple version
+    return ( // index page simple and looped version
       <div style={styles.homeTrigger} className="fade-enter">
         {this.renderTrigger(playing)}
         <Player
           url={'/' + process.env.PUBLIC_URL + 'mp3s/' + this.props.content.url}
           playStatus={this.state.status}
           onPlaying={this.updateSoundBar}
+          position={this.state.position}
+          onFinishedPlaying={this.handleFinishedPlaying}
         />
     </div>
     );
@@ -103,9 +112,8 @@ export default Radium(SoundPlayer);
 const styles = {
   svgWrapper: {
     width: 48,
-    height: 48,
-    transition: 'background 0.4s ease',
-    border: '5px solid transparent',
+    height: 48, 
+    border: '8px solid transparent',
     borderRadius: '50%',
     margin: '1em auto',
     cursor: 'pointer',
@@ -119,7 +127,7 @@ const styles = {
     width: 48,
     height: 48,
     transition: 'background 0.4s ease',
-    border: '5px solid #0045D2',
+    border: '8px solid #0045D2',
     borderRadius: '50%',
     margin: '1em auto',
     cursor: 'pointer',

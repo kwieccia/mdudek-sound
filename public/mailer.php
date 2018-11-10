@@ -18,7 +18,7 @@ exit;
 
 // Set the recipient email address.
 // FIXME: Update this to your desired email address.
-$recipient = "michalesdudek@gmail.com";
+$recipient = "contact@michaldudek.website";
 
 // Set the email subject.
 $subject = "Formularz kontaktowy / sound portfolio";

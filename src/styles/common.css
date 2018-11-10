@@ -1,7 +1,6 @@
-@import url('https://fonts.googleapis.com/css?family=Montserrat:400,700');
+@import url('https://fonts.googleapis.com/css?family=Montserrat:400,700,800');
 
 html {
-  
 }
 
 body {
@@ -10,8 +9,10 @@ body {
   font-family: 'Montserrat', sans-serif;
   font-size: 16px;
   line-height: 1.2;
-  background: #111;
+  background: #090909;
   position: relative;
+  overflow:hidden;
+
 }
 
 form, input, textarea {

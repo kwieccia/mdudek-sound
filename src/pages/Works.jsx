@@ -40,7 +40,7 @@ const styles = {
     display: 'block',
     margin: '0 auto',
     borderBottom: '1px solid white',
-    padding: '20px 0 23px'
+    padding: '40px 0'
   }},
   workPrompt: {
     textDecoration: 'underline',
@@ -48,7 +48,7 @@ const styles = {
   },
   workName: {...css.h1, ...{
     opacity: 1,
-    margin: '7px 0 10px',
+    margin: '16px 0',
     '@media screen and (max-width: 640px)': {
       fontSize: '3em',
       marginBottom: 12
@@ -57,12 +57,16 @@ const styles = {
   workArrows: {
     opacity: 1,
     fontSize: '7em',
-    margin: 0,
+    margin: '5px 0',
     fontWeight: 700,
     float: 'right',
+    paddingLeft: 25,
     '@media screen and (max-width: 640px)': {
       fontSize: '5em',
-      paddingTop: 5
+      paddingTop: 0
+    },
+    '@media screen and (max-width: 519px)': {
+      display: 'none'
     }
   }
 };
