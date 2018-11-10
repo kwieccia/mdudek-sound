@@ -21,12 +21,31 @@ class AppContent extends Component {
   state = {
     menuExpanded: false,
     playerActive: false,
-    popup: false
+    popup: false,
+    homeEntry: false
+  }
+
+  componentDidMount() {
+    // preload background images
+    [
+      'index',
+      'works',
+      'gear',
+      'services',
+      'contact',
+      'works_details'
+    ].map(name => '/' + process.env.PUBLIC_URL + 'images/tla_' + name + '04_bg.jpg').forEach((picture) => {
+        const img = new Image();
+        img.src = picture;
+    });
+    if (this.props.location.pathname === '/') {
+      this.setState({homeEntry: true})
+    }
   }
 
   componentDidUpdate(prevProps) {
     if (this.props.location.pathname !== prevProps.location.pathname) {
-      this.setState({playerActive: false})
+      this.setState({playerActive: false, homeEntry: false});
     }
   }
 
@@ -52,7 +71,7 @@ class AppContent extends Component {
 
   render() {
     return (
-      <div style={styles.perspective}>
+      <div style={styles.perspective} className="fade-enter-page">
       <div style={[
           styles.pageBackground(this.props.location.pathname, this.state.playerActive)
       ]} />
@@ -92,6 +111,7 @@ class AppContent extends Component {
                 <Route exact path="/"
                   render={(props) => <Homepage {...props}
                     popup={this.popup}
+                    shouldShine={this.state.homeEntry}
                   />}
                 />
                 <Route path="/contact" component={Contact} />

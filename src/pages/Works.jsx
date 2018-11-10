@@ -60,7 +60,7 @@ const styles = {
     margin: '5px 0',
     fontWeight: 700,
     float: 'right',
-    paddingLeft: 25,
+    paddingLeft: 35,
     '@media screen and (max-width: 640px)': {
       fontSize: '5em',
       paddingTop: 0

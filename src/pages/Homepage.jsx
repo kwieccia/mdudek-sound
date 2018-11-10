@@ -23,19 +23,18 @@ class Homepage extends Component {
     this.props.popup(false);
   };
 
-  render() {
-    console.warn(this.props.popupOpened)
+  render() { 
     return (
       <React.Fragment>
         <div style={styles.homeWrapper}>
-          <h1 style={styles.h1}>MAKING YOUR WORLD ALIVE</h1>
+          <h1 style={styles.h1}  className={this.props.shouldShine ? 'fade-enter-text' : null}>MAKING YOUR WORLD ALIVE</h1>
           <div style={styles.homeSlogan}>
             <span style={styles.homeSloganItem}>Composition</span>
             <span style={styles.homeSloganItem}>Sound design</span>
             <span style={styles.homeSloganItem}>Mix</span>
             <span style={styles.homeSloganItem}>Post production</span>
           </div>
-          <div style={styles.buttons}>
+          <div style={styles.buttons} className={this.props.shouldShine ? 'fade-buttons' : null}>
             <a onClick={this.openPopup} style={styles.homeButton}>see how i work</a>
             <StyledLink to='/works' style={styles.homeButton}>Check latest works</StyledLink>
           </div>

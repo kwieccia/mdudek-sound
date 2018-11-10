@@ -1,7 +1,15 @@
 .fade-enter {
     animation: showPageOnLoad 1s ease-in-out 0s alternate;
 }
-
+.fade-enter-page {
+    animation: showPageOnLoad 3s ease-in-out 0s alternate;
+}
+.fade-buttons {
+    animation: showBtnsOnLoad 1.8s linear 0s alternate;
+}
+.fade-enter-text {
+  animation: showText 4s ease-in-out 0s alternate;
+}
 .fade-enter.fade-enter-active {}
 
 .fade-exit {
@@ -22,6 +30,33 @@
   to {
     opacity: 1;
     transform: translateY(0);
+  }
+}
+
+@keyframes showBtnsOnLoad {
+  from {
+    transform: translateY(-20px);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
+
+@keyframes showText {
+  0% {
+    transform: translateY(-20px);
+  }
+  40% {
+    text-shadow: none;
+  }
+  55% {
+    transform: translateY(0);
+  }
+  80% {
+    text-shadow: 0 0 30px white;
+  }
+  100% {
+    text-shadow:none;
   }
 }
 .loader {

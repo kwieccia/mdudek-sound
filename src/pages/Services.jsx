@@ -102,7 +102,7 @@ const styles = {
     maxWidth: css._contentWidth,
     display: 'block',
     margin: '0 auto',
-    padding: '40px 80px 40px 0',
+    padding: '40px 0',
     borderBottom: '1px solid white',
     position: 'relative',
     ':hover': {
@@ -129,17 +129,17 @@ const styles = {
   serviceArrows: {
     opacity: 1,
     fontSize: '7em',
-    margin: '-8px 0 0 0',
+    margin: '0 0 0 25px',
     lineHeight: 1.15,
     fontWeight: 600,
-    position: 'absolute',
-    right: 0,
-    top: '50%',
-    transform: 'translateY(-50%)',
-    '@media screen and (max-width: 640px)': {
+    float: 'right',
+    '@media screen and (max-width: 840px)': {
       fontSize: '5em',
-      marginTop: -15,
+      marginTop: 2,
       lineHeight: 1.05
+    },
+    '@media screen and (max-width: 640px)': { 
+      marginTop: 5,
     },
     '@media screen and (max-width: 470px)': {
       display: 'none'
