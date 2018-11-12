@@ -54,7 +54,10 @@ class AppContent extends Component {
   }
 
   // Turn off homepage sound player and entry animation on page change.
-  locationChangeHandler = () => this.setState({ playerActive: false, homeEntry: false });
+  locationChangeHandler = () => {
+    document.getElementById('scrollArea').scrollTo(0, 0);
+    this.setState({ playerActive: false, homeEntry: false });
+  }
 
   // Hamburger navigation on small screens.
   toggleMenu = () => this.setState({ menuExpanded: !this.state.menuExpanded });
@@ -102,7 +105,7 @@ class AppContent extends Component {
     const urlPath = this.props.location.pathname;
 
     return (
-      <div style={styles.perspective} className="fade-enter-page">
+      <div style={styles.perspective} className="fade-enter-page" id="scrollArea">
         <div style={styles.pageBackground(urlPath, playerActive)} />
         <div style={styles.pageWrapper}>
           {this.renderHeader()}
