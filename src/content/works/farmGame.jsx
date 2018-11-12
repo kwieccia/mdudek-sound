@@ -1,7 +1,7 @@
 import React from 'react';
 
 export default {
-  name: "Survival Game",
+  name: "Farm Game",
   description: (
     <React.Fragment>
       <p>Funny mobile game where you`re a farmer.</p>

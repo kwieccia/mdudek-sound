@@ -55,7 +55,7 @@ class AppContent extends Component {
 
   // Turn off homepage sound player and entry animation on page change.
   locationChangeHandler = () => {
-    document.getElementById('scrollArea').scrollTo(0, 0);
+    document.getElementById('scrollArea').scrollTop = 0;
     this.setState({ playerActive: false, homeEntry: false });
   }
 
