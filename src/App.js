@@ -68,6 +68,8 @@ class AppContent extends Component {
   popup = (opened) => this.setState({popup: opened, playerActive: false});
 
   renderHeader() {
+    const {menuExpanded} = this.state;
+
     return (
       <header style={styles.pageHeader}>
         <div style={styles.pageLogo}>
@@ -87,9 +89,9 @@ class AppContent extends Component {
           <StyledLink style={styles.pageMenuLink} to="/contact">contact</StyledLink>
         </nav>
         <div style={styles.hamburger} onClick={this.toggleMenu}>
-          <div style={styles.hamburgerLine1} />
-          <div style={styles.hamburgerLine2} />
-          <div style={styles.hamburgerLine3} />
+          <div style={[styles.hamburgerLine1, menuExpanded ? styles.hamburgerLine1Cross : null]} />
+          <div style={[styles.hamburgerLine2, menuExpanded ? styles.hamburgerLine2Cross : null]} />
+          <div style={[styles.hamburgerLine3, menuExpanded ? styles.hamburgerLine3Cross : null]} />
         </div>
       </header>
     );
@@ -311,7 +313,8 @@ const styles = {
   pageTransitionWrapper: {
     position: 'relative',
     animation: 'showPageOnLoad 1s ease-in-out 0s alternate',
-    display: 'flex'
+    display: 'flex',
+    justifyContent: 'center'
   },
   hamburger: {
     height: 30,
@@ -332,16 +335,31 @@ const styles = {
   hamburgerLine1: {
     background: 'white',
     height: 5,
-    width: '100%'
+    width: '100%',
+    transition: 'all 1s ease-in-out'
   },
   hamburgerLine2: {
     background: 'white',
     height: 5,
-    width: '60%'
+    width: '60%',
+    transition: 'all 1s ease-in-out'
   },
   hamburgerLine3: {
     background: 'white',
     height: 5,
-    width: '80%'
+    width: '80%',
+    transition: 'all 1s ease-in-out'
+  },
+  hamburgerLine1Cross: {
+    transform: 'rotate(-45deg)  translate(1px, -1px)',
+    transformOrigin: 'top right'
+  },
+  hamburgerLine2Cross: {
+    opacity: 0
+  },
+  hamburgerLine3Cross: {
+    transform: 'rotate(45deg)',
+    width: '100%',
+    transformOrigin: 'bottom right'
   }
 };

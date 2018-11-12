@@ -52,7 +52,7 @@ class SoundPlayer extends Component {
   };
 
   handleFinishedPlaying = () => {
-    this.setState({ position: 0 });
+    this.setState({ position: 10 });
   };
 
   renderTrigger(playing) {
@@ -112,7 +112,7 @@ export default Radium(SoundPlayer);
 const styles = {
   svgWrapper: {
     width: 48,
-    height: 48, 
+    height: 48,
     border: '8px solid transparent',
     borderRadius: '50%',
     margin: '1em auto',
