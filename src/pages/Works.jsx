@@ -13,6 +13,9 @@ const Entry = (props) => (
         {props.content.description}
       </span>
       <h2 style={styles.workName}>{props.content.name}</h2>
+      {props.content.info && (
+        <p>{props.content.info}</p>
+      )}
       <span style={styles.workPrompt}>see project</span>
     </Link>
   </article>

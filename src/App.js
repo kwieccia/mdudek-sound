@@ -175,6 +175,8 @@ const switchBackground = (page) => {
     case '/works/farm-game':
     case '/works/logic-game':
     case '/works/horror-game':
+    case '/works/spyhack-game':
+    case '/works/flush-game':
       return returnUrl('works_details');
     default:
       return returnUrl('index');

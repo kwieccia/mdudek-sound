@@ -11,6 +11,8 @@ import logicGame from '../content/works/logicGame';
 import mysteryGame from '../content/works/mysteryGame';
 import farmGame from '../content/works/farmGame';
 import horrorGame from '../content/works/horrorGame';
+import spyhackGame from '../content/works/spyhackGame';
+import flushGame from '../content/works/flushGame';
 
 const returnContentByUrl = (id) => {
   const works = {
@@ -19,7 +21,9 @@ const returnContentByUrl = (id) => {
     'logic-game': logicGame,
     'mystery-game': mysteryGame,
     'farm-game': farmGame,
-    'horror-game': horrorGame
+    'horror-game': horrorGame,
+    'spyhack-game': spyhackGame,
+    'flush-game': flushGame
   };
   return works[id];
 };

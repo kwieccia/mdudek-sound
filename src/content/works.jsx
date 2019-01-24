@@ -1,4 +1,17 @@
+import React from 'react';
+
 export default [
+  {
+    name: "Spyhack Game",
+    description: "TRAILER MUSIC, LEVEL BACKGROUND MUSIC, MAIN MENU MUSIC, SFX",
+    url: "spyhack-game",
+    info: <span>Developer: Pyramid Games, Art Games &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Publisher: Ultimate Games S.A.</span>
+  },
+  {
+    name: "Flush Game",
+    description: "Main theme music, level background music",
+    url: "flush-game"
+  },
   {
     name: "Survival Game",
     description: "music composition, sound design, mix",
