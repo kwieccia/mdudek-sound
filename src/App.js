@@ -177,6 +177,8 @@ const switchBackground = (page) => {
     case '/works/horror-game':
     case '/works/spyhack-game':
     case '/works/flush-game':
+    case '/works/warplanes-ww1':
+    case '/works/shoguns-empire':
       return returnUrl('works_details');
     default:
       return returnUrl('index');

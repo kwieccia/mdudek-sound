@@ -1,15 +1,11 @@
 import React from 'react';
 
 export default {
-  name: "Spyhack Game",
+  name: "Spyhack",
   description: (
     <React.Fragment>
-      <p>SPYHACK: Episode 1 - Action and strategy PC game in future.<br/><br/>
-        {`"It's year 2111. The world is ruled by technocorporations.
-           Their experiments have long exceeded all norms of ethics.
-           The best agents of the Advanced Technology Division stand on
-           the guard of technological rule of law. Become one of them and
-           protect humanity from self-destruction." (press materials)`}<br/><br/>
+      <p>SPYHACK: Episode 1 - Action and strategy PC game in future. <br/><br/>
+        {`"It's year 2111. The world is ruled by technocorporations. Their experiments have long exceeded all norms of ethics. The best agents of the Advanced Technology Division stand on the guard of technological rule of law. Become one of them and protect humanity from self-destruction." (press materials)`}<br/><br/>
          <span>Developer: Pyramid Games, Art Games &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Publisher: Ultimate Games S.A.</span>
        </p>
        <img

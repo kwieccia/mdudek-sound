@@ -40,7 +40,7 @@ class Homepage extends Component {
           </div>
           <div style={styles.buttons} className={animate ? 'fade-buttons' : null}>
             <a onClick={this.openPopup} style={styles.homeButton}>see how i work</a>
-            <StyledLink to='/works/spyhack-game' style={styles.homeButton}>Check the latest work</StyledLink>
+            <StyledLink to='/works/warplanes-ww1' style={styles.homeButton}>Check the latest work</StyledLink>
           </div>
         </div>
         {this.state.popup ? (

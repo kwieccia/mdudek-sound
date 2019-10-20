@@ -2,14 +2,26 @@ import React from 'react';
 
 export default [
   {
-    name: "Spyhack Game",
-    description: "TRAILER MUSIC, LEVEL BACKGROUND MUSIC, MAIN MENU MUSIC, SFX",
+    name: "Warplanes: WW1",
+    description: "MUSIC COMPOSITION",
+    url: "warplanes-ww1",
+    info: <span>Developer: HomeNetGames</span>
+  },
+  {
+    name: "Shogun's Empire",
+    description: "SOUND DESIGN",
+    url: "shoguns-empire",
+    info: <span>Developer: HomeNetGames</span>
+  },
+  {
+    name: "Spyhack",
+    description: "MUSIC COMPOSITION, SOUND DESIGN",
     url: "spyhack-game",
     info: <span>Developer: Pyramid Games, Art Games &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Publisher: Ultimate Games S.A.</span>
   },
   {
-    name: "Flush Game",
-    description: "Main theme music, level background music",
+    name: "Flush",
+    description: "MUSIC COMPOSITION",
     url: "flush-game"
   },
   {

@@ -4,10 +4,11 @@ export default {
   name: "Survival Game",
   description: (
     <React.Fragment>
-      <p>You are waking up on an island (randomly generated) and you don't remember anything. Your only goal is to to escape, but island will not allow for it. Isometric survival game with multiplayer mode.</p>
+      <p>You are waking up on an island (randomly generated) and you don't remember anything. Your only goal is to escape, but the island does not allow for it. Isometric survival game with multiplayer mode.
+</p>
     </React.Fragment>
   ),
-  category: "Music composition, sound design, mix. All sounds were fully recorded and created by me without using any sfx libraries.",
+  category: "Music composition, sound design, mix.",
   music: [
     {
       name: "Main theme",

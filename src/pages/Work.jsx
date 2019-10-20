@@ -13,6 +13,8 @@ import farmGame from '../content/works/farmGame';
 import horrorGame from '../content/works/horrorGame';
 import spyhackGame from '../content/works/spyhackGame';
 import flushGame from '../content/works/flushGame';
+import ww1 from '../content/works/ww1';
+import shogunsEmpire from '../content/works/shogunsEmpire';
 
 const returnContentByUrl = (id) => {
   const works = {
@@ -23,7 +25,9 @@ const returnContentByUrl = (id) => {
     'farm-game': farmGame,
     'horror-game': horrorGame,
     'spyhack-game': spyhackGame,
-    'flush-game': flushGame
+    'flush-game': flushGame,
+    'warplanes-ww1': ww1,
+    'shoguns-empire': shogunsEmpire,
   };
   return works[id];
 };

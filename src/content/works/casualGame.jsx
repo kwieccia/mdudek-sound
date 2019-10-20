@@ -4,7 +4,7 @@ export default {
   name: "Casual Game",
   description: (
     <React.Fragment>
-      <p>Mobile game in small pirate and carribian style.</p>
+      <p>Mobile game in a little pirate and carribian style. </p>
     </React.Fragment>
   ),
   category: "Music composition, mix.",

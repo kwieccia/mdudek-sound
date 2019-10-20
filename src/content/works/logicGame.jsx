@@ -4,7 +4,8 @@ export default {
   name: "Logic Game",
   description: (
     <React.Fragment>
-      <p>Mobile game where you are robot in spaceship.</p>
+      <p>Mobile game where you are root in spaceship. 
+</p>
     </React.Fragment>
   ),
   category: "Music composition, mix.",

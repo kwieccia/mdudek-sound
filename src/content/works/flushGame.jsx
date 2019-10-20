@@ -1,14 +1,10 @@
 import React from 'react';
 
 export default {
-  name: "Flush Game",
+  name: "Flush",
   description: (
     <React.Fragment>
-      <p>Flush is an arcade game with beautiful, old-school graphics that will
-        test your agility and perceptiveness. Seal the cracks appearing on your
-        screen, collect points, trigger combos and put your score on the
-        leaderboards. Strive to be the best among your friends. That's the
-        only way you can prevent the flooding.
+      <p>Flush is an arcade game with beautiful, old-school graphics that will test your agility and perceptiveness. Seal the cracks appearing on your screen, collect points, trigger combos and put your score on the leaderboards. Strive to be the best among your friends. That's the only way you can prevent the flooding.
       </p>
       <img
         src={'/' + process.env.PUBLIC_URL + 'images/flush_screeny.png'}

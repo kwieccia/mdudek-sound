@@ -4,7 +4,7 @@ export default {
   name: "Mystery Game",
   description: (
     <React.Fragment>
-      <p>Dark windy forest at night and something is coming close but you don`t know what is this.</p>
+      <p>Dark windy forest at night and something is coming close, but you don't know what it is. </p>
     </React.Fragment>
   ),
   category: "Music composition, mix.",

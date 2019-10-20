@@ -50,6 +50,7 @@ const styles = {
     fontSize: '0.85em'
   },
   workName: {...css.h1, ...{
+    fontSize: '4.925rem',
     opacity: 1,
     margin: '16px 0',
     '@media screen and (max-width: 640px)': {
@@ -59,7 +60,7 @@ const styles = {
   }},
   workArrows: {
     opacity: 1,
-    fontSize: '7em',
+    fontSize: '6.55em',
     margin: '5px 0',
     fontWeight: 700,
     float: 'right',
